@@ -1,0 +1,29 @@
+version: "3.5"
+
+services:
+  consul:
+    image: consul:latest
+    restart: always
+    container_name: "consul"
+    ports:
+      - 8500:8500
+    command: agent -server -dev -ui -log-level debug -bind 0.0.0.0 -client 0.0.0.0
+    networks:
+      - integrate_back
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123Mudar
+      MONGO_INITDB_DATABASE: test-database
+    ports:
+      - 27017:27017
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+
+networks:
+  integrate_back:
+    name: integrate_back
+    driver: bridge

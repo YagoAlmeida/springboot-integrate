@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    consul:
+      discovery:
+        prefer-ip-address: true
+        tags: version=1.0
+        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}
+        healthCheckPath: /actuator/health
+        healthCheckInterval: 15s
+        healthCheckTimeout: 60s
+        healthCheckCriticalTimeout: 5m
+
+server:
+  port: 8091

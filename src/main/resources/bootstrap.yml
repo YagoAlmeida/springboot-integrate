@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: springboot.integrate
+  cloud:
+    consul:
+      host: 192.168.0.3
+      port: 8500
+      config:
+        enabled: true
+        prefix: config
+        defaultContext: application
+        data-key: data
+        profileSeparator: '::'
+        format: yaml
+  data:
+    mongodb:
+      uri: ${mongo.uri}
+management:
+  endpoint:
+    health:
+      show-details: always
